@@ -76,7 +76,15 @@
                 <tr>
                     <td>
                         <a href="{{action('UserController@edit', $user->id)}}">Modificar</a>
-                        <a href="{{action('UserController@destroy', $user->id)}}">Eliminar</a>
+                    </td>
+                    <td>
+                        <form action="{{action('UserController@destroy', $user->id)}}" method="post">
+                            {{csrf_field()}}
+                            <input name="_method" type="hidden" value="DELETE">
+                            <button type="submit">Eliminar</button>
+                        </form>
+                    </td>
+                    <td>
                         <a href="{{action('UserController@show', $user->id)}}" >Mostrar</a>
                     </td>
                     <td>{{$user->name}}</td>

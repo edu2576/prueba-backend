@@ -73,6 +73,9 @@
                 @endif
             >
                 @csrf
+                @if($method == 'edit')
+                  @method('PUT')
+                @endif
                 <div class="content">
                     <label>
                         Nombre
@@ -100,7 +103,11 @@
                         <option value="1" {{isset($users) && $users->permissions_id == 1 ? 'selected' : ''}}>Crud</option>
                         <option value="2" {{isset($users) && $users->permissions_id == 2 ? 'selected' : ''}}>Show</option>
                     </select>
-                    <input type="submit" id="save" name="save" value="Guardar">
+                    @if($method == 'show')
+                      <a href="{{action('UserController@index')}}" >Volver</a>
+                    @else
+                      <input type="submit" id="save" name="save" value="Guardar">
+                    @endif
                 </div>
             </form>
         </div>

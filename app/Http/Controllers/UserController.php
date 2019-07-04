@@ -51,7 +51,7 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        $user = Share::find($id);
+        $user = Users::find($id);
         $user->name = $request->get('name');
         $user->email = $request->get('email');
         $user->password = $request->get('password');
@@ -59,6 +59,21 @@ class UserController extends Controller
         $user->permissions_id = $request->get('permissions_id');
         $user->save();
 
-        return redirect('users.index')->with('success', 'Stock has been updated');
+        return redirect()->route('users.index')->with('success', 'Stock has been updated');
+    }
+
+    public function destroy($id)
+    {
+        $user = Users::find($id);
+        $user->delete();
+
+        return redirect()->route('users.index')->with('success', 'Stock has been deleted Successfully');
+    }
+
+    public function show($id)
+    {
+        $users = Users::find($id);
+        $method = 'show';
+        return view('users', compact('users'))->with('method',$method);
     }
 }
