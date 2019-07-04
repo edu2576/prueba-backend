@@ -17,10 +17,14 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('email');
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->unsignedBigInteger('roles_id');
+            $table->unsignedBigInteger('permissions_id');
             $table->rememberToken();
             $table->timestamps();
+
+            //$table->foreign('roles_id')->references('id')->on('roles');
+            //$table->foreign('permissions_id')->references('id')->on('permissions');
         });
     }
 

@@ -65,20 +65,44 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            <div class="content">
-                <label>
-                    Nombre
-                </label>
-                <input type="text" id="name" name="name" value=""/>
-                <label>
-                    Correo
-                </label>
-                <input type="text" id="email" name="email" value=""/>
-                <label>
-                    Contraseña
-                </label>
-                <input type="password" id="password" name="password" value=""/>
-            </div>
+            <form method="post"
+                @if($method=="create")
+                  action="{{route('users.store')}}"
+                @elseif($method=='edit')
+                  action="{{route('users.update',$users->id)}}"
+                @endif
+            >
+                @csrf
+                <div class="content">
+                    <label>
+                        Nombre
+                    </label>
+                    <input type="text" id="name" name="name" value="{{isset($users) ? $users->name : ''}}"/>
+                    <label>
+                        Correo
+                    </label>
+                    <input type="text" id="email" name="email" value="{{isset($users) ? $users->email : ''}}"/>
+                    <label>
+                        Contraseña
+                    </label>
+                    <input type="password" id="password" name="password" value=""/>
+                    <label>
+                        Rol
+                    </label>
+                    <select id="roles_id" name="roles_id">
+                        <option value="1" {{isset($users) && $users->roles_id == 1 ? 'selected' : ''}}>Admin</option>
+                        <option value="2" {{isset($users) && $users->roles_id == 2 ? 'selected' : ''}}>Auxiliar</option>
+                    </select>
+                    <label>
+                        Permisos
+                    </label>
+                    <select id="permissions_id" name="permissions_id">
+                        <option value="1" {{isset($users) && $users->permissions_id == 1 ? 'selected' : ''}}>Crud</option>
+                        <option value="2" {{isset($users) && $users->permissions_id == 2 ? 'selected' : ''}}>Show</option>
+                    </select>
+                    <input type="submit" id="save" name="save" value="Guardar">
+                </div>
+            </form>
         </div>
     </body>
 </html>
