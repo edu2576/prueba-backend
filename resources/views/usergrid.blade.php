@@ -67,7 +67,7 @@
         <div class="flex-center position-ref full-height">
             <table>
                 <tr>
-                    <td><a href="{{action('UserController@create')}}">Crear</a></th>
+                    <td colspan="3"><a href="{{action('UserController@create')}}">Crear</a></th>
                     <th>Nombre</th>
                     <th>Correo</th>
                 </tr>
